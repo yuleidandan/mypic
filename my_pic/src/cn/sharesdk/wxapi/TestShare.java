@@ -63,7 +63,7 @@ public class TestShare extends  BaseActivity  implements OnClickListener{
 
 		/**
 		 * 手册内容 分享111111111112222223333
-		 * maq
+		 * maq11
 		 */
 		Intent intent = getIntent();
 		if (intent != null) {
