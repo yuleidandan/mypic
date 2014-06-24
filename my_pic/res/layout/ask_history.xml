@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:id="@+id/llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <include layout="@layout/top1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/asktimeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llayout"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/asktime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/user_green"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/asktimeLayout"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@drawable/reader_item_divider"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/transparent" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/tv_nodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/nodata"
+        android:textColor="@color/lightgray"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

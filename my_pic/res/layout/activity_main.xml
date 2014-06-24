@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:id="@+id/llayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <include layout="@layout/top1" />
+
+        <include layout="@layout/top2" />
+    </LinearLayout>
+
+    <com.my.comm.MyScrollLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/llayout" >
+
+        <com.my.comm.MyFrame
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <ListView
+                android:id="@+id/listMainView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@drawable/reader_item_divider"
+                android:dividerHeight="1dp"
+                android:listSelector="@android:color/transparent" >
+            </ListView>
+        </com.my.comm.MyFrame>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@drawable/reader_item_divider"
+            android:dividerHeight="1dp"
+            android:listSelector="@android:color/transparent" >
+
+            <ListView
+                android:id="@+id/listInfoView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@drawable/reader_item_divider"
+                android:dividerHeight="1dp"
+                android:listSelector="@android:color/transparent" >
+            </ListView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+            <include layout="@layout/me" />
+        </FrameLayout>
+    </com.my.comm.MyScrollLayout>
+
+</RelativeLayout>

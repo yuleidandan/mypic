@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">名医看看</string>
+    <string name="title_sp">社区咨询</string>
+    <string name="title_zixun">资讯</string>
+    <string name="title_me">我</string>
+    <string name="action_settings">设置</string>
+	<string name="net_err">网络异常，请检查网络设置</string>
+	<string name="initmsg">正在加载数据&#8230;</string>
+	<string name="address">位置</string>
+	
+	<string name="news_head_back">返回</string>
+	<string name="nodata">暂无数据</string>
+	
+	<string name="setting">设置</string>
+	<string name="head_photo">头像</string>
+	<string name="binding_community">绑定社区</string>
+	<string name="check_update">检查更新</string>
+	<string name="aboutus">关于我们</string>
+	
+	
+	<string name="county">国家和地区</string>
+	<string name="please_write_phone">请填写手机号</string>
+	<string name="please_wirte_password">请填写独立密码</string>
+	
+	
+	<string name="doctor_busy">现在忙碌，暂不接受咨询</string>
+	<string name="doctor_free">现在空闲，可以向我咨询</string>
+	
+	<string name="binding_sq">绑定社区</string>
+	<string name="ok">确定</string>
+	<string name="cancle">取消</string>
+	<string name="eroor_sq_name">社区名称为空</string>
+	
+	<string name="updatadialog_title">系统更新</string>
+    <string name="updata_ok">立即更新</string>
+    <string name="updata_cannel">下次再说</string>
+	
+	 <!-- 二维码扫描 -->
+    <string name="scan_tip">请将二维码置于取景框内扫描</string>
+    <string name="scan_retry">二维码扫描出错啦,请重新扫描</string>
+    <string name="scan_title">扫一扫</string>
+    
+    
+     <string name="ac_name_image_list">Image List Example</string>
+    <string name="ac_name_image_grid">Image Grid Example</string>
+    <string name="ac_name_image_pager">Image Pager Example</string>
+    <string name="ac_name_image_gallery">Image Gallery Example</string>
+    <!-- Labels -->
+    <string name="label_activity_examples">Activity Examples</string>
+    <string name="menu_item_clear_memory_cache">Clear memory cache</string>
+    <string name="menu_item_clear_disc_cache">Clear disc cache</string>
+    <string name="menu_item_pause_on_scroll">Pause on scroll</string>
+    <string name="menu_item_pause_on_fling">Pause on fling</string>
+    <string name="button_image_list">ListView</string>
+    <string name="button_image_grid">GridView</string>
+    <string name="button_image_pager">ViewPager</string>
+    <string name="button_image_gallery">Gallery</string>
+    <!-- Content descriptions -->
+    <string name="descr_image">Image</string>
+    
+    
+    
+    <!-- jpush -->
+        <string name="tag_hint">Tag为大小写字母，数字，下划线,中文， 多个用以逗号分隔</string>
+    <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
+    <string name="style_hint">style为数字</string>
+    <string name="error_style_empty">style不能为空</string>
+    <string name="error_alias_empty">alias不能为空</string>
+    <string name="error_tag_empty">tag不能为空</string>
+    <string name="error_tag_gs_empty">格式不对</string>
+    <string name="error_network">网络连接异常,初始化失败 请检查网络！</string>
+    <string name="logining">程序在后台执行, 请查看日志！</string>
+    <string name="setting_su">设置成功</string>
+</resources>

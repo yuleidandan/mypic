@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingLeft="15dip"
+        android:paddingRight="15dip" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dip"
+            android:paddingLeft="5dip"
+            android:paddingTop="15dip" >
+
+            <com.my.widget.HeadImageView
+                android:id="@+id/myAvatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/avt_user_male" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/myAvatar"
+                android:orientation="vertical"
+                android:paddingLeft="10dip" >
+
+                <TextView
+                    android:id="@+id/myName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:text="名字"
+                    android:textColor="@color/black"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:id="@+id/myKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="2dip"
+                    android:singleLine="true"
+                    android:text="123456"
+                    android:textColor="@color/gray"
+                    android:textSize="16dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lightgray" />
+
+        <LinearLayout
+            android:id="@+id/addressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dip"
+            android:paddingLeft="5dip"
+            android:paddingTop="5dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+
+                <ImageView
+                    android:id="@+id/addressImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user_icon_weizhi" />
+
+                <TextView
+                    android:id="@+id/addressTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/addressImg"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:paddingLeft="20dip"
+                    android:text="@string/address"
+                    android:textColor="@color/black"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:id="@+id/addressDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/addressTxt"
+                    android:singleLine="true"
+                    android:gravity="right"
+                    android:padding="2dip"
+                    android:textColor="@color/gray"
+                    android:textSize="15dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lightgray" />
+
+        <LinearLayout
+            android:id="@+id/settingsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dip"
+            android:paddingLeft="5dip"
+            android:paddingTop="5dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+
+                <ImageView
+                    android:id="@+id/settingsImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user_icon_shezhi" />
+
+                <ImageView
+                    android:id="@+id/settingsDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:padding="2dip"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user_icon01" />
+
+                <TextView
+                    android:id="@+id/settingsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/settingsDetail"
+                    android:layout_toRightOf="@id/settingsImg"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:paddingLeft="20dip"
+                    android:text="设置"
+                    android:textColor="@color/black"
+                    android:textSize="20dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lightgray" />
+
+        <LinearLayout
+            android:id="@+id/zxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dip"
+            android:paddingLeft="5dip"
+            android:paddingTop="5dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip" >
+
+                <ImageView
+                    android:id="@+id/zxImg"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user_icon_zixun" />
+
+                <ImageView
+                    android:id="@+id/zxDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:padding="2dip"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user_icon01" />
+
+                <TextView
+                    android:id="@+id/zxTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/zxDetail"
+                    android:layout_toRightOf="@id/zxImg"
+                    android:gravity="left"
+                    android:padding="2dip"
+                    android:paddingLeft="20dip"
+                    android:text="咨询记录"
+                    android:textColor="@color/black"
+                    android:textSize="20dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/lightgray" />
+    </LinearLayout>
+
+</LinearLayout>

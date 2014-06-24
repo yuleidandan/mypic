@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shb_news_head_include"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/news_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="#007f7f" >
+
+        <ImageView
+            android:id="@+id/butt_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:drawablePadding="10dp"
+            android:src="@drawable/main_menu"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/butt_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@null"
+            android:drawableLeft="@drawable/new_back"
+            android:drawablePadding="10dp"
+            android:text="@string/news_head_back"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:drawablePadding="10dp"
+            android:src="@drawable/icon"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="2dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20.0sp" />
+
+        <Button
+            android:id="@+id/butt_right"
+            style="@style/shadowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="@null"
+            android:visibility="gone" >
+        </Button>
+
+        <Button
+            android:id="@+id/butt_right1"
+            style="@style/shadowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:visibility="gone" >
+        </Button>
+    </RelativeLayout>
+
+</RelativeLayout>
