@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
 
+import com.amima.pic.Pic_ListGroupActivity;
 import com.amima.pic.R;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
@@ -120,7 +121,7 @@ public class Sq_InitActivity extends BaseActivity {
 		MyApp.user.setType(type);
 		SystemOut.out("type : " + userType);
 
-		Intent intent = new Intent(this, Sq_MainActivity.class);
+		Intent intent = new Intent(this, Pic_ListGroupActivity.class);
 		startActivity(intent);
 		finish();
 
