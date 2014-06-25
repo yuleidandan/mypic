@@ -33,8 +33,10 @@ import com.my.util.Protocol;
 import com.my.util.SystemOut;
 import com.my.util.TimeTools;
 import com.my.util.Tools;
+import com.slidingmenu.lib.SlidingMenu;
 
-public class Pic_ListGroupActivity extends BaseActivity implements OnClickListener {
+public class Pic_ListGroupActivity extends BaseActivity implements
+		OnClickListener {
 	private View footerView;
 	View Progress_view;
 	LayoutInflater mInflater;
@@ -52,6 +54,8 @@ public class Pic_ListGroupActivity extends BaseActivity implements OnClickListen
 	private TextView tv_nodata;
 	private TextView tv_message;
 	private ImageView image_back;
+
+	private SlidingMenu slidingMenu = null;
 
 	// id 281 有数据 分页有问题
 
@@ -90,6 +94,19 @@ public class Pic_ListGroupActivity extends BaseActivity implements OnClickListen
 			getAllData(app.user.getId(), currentpage, pagenum);
 		}
 
+		leftSlidingMenu();
+	}
+
+	private void leftSlidingMenu() {
+		// TODO Auto-generated method stub
+		// 设置抽屉菜单
+		slidingMenu = new SlidingMenu(this);
+		slidingMenu.setMode(SlidingMenu.LEFT);
+		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); // 触摸边界拖出菜单
+		//slidingMenu.setMenu(R.layout.edj_membercenter);//设置抽屉菜单布局文件
+		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);//设置抽屉菜单的宽度
+		// 将抽屉菜单与主页面关联起来
+		slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 	}
 
 	/**
