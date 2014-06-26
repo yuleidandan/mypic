@@ -289,6 +289,14 @@
 
     <color name="black">#000000</color> <!-- 黑色 -->
 	<color name="doctor_title_blue">#0287C5</color>
+	
+	
+	    <color name="transparent">#0000</color>
+    
+    <color name="backColor">#2000</color>
+    <color name="detail_bgColor">#f5f5f5</color>
+    
+    <color name="defaultTextColor">#666</color>
 
     <!-- start zxing -->
     <color name="viewfinder_frame">#2477ab</color>

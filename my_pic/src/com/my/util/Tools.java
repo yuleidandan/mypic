@@ -56,7 +56,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.amima.pic.R;
-import com.my.activity.sq.bean.Pic_ServiceItemBean;
+import com.my.activity.sq.bean.Pic_ServiceBean;
 import com.my.app.MyApp;
 
 public class Tools {
@@ -756,18 +756,22 @@ public class Tools {
 	 * 获取图片分类
 	 * @return
 	 */
-	public List<Pic_ServiceItemBean> getServiceItem(){
+	public static ArrayList<Pic_ServiceBean> getServiceItem(){
 		
-		List<Pic_ServiceItemBean> mlist=new ArrayList<Pic_ServiceItemBean>();
-		Pic_ServiceItemBean  mbean1=new Pic_ServiceItemBean();
+		ArrayList<Pic_ServiceBean> mlist=new ArrayList<Pic_ServiceBean>();
+		Pic_ServiceBean  mbean1=new Pic_ServiceBean();
 		mbean1.setId("1");
-		mbean1.setClassName("美女");
+		mbean1.setClassName("趣图");
+		mbean1.setTitle("多玩趣图");
+		mbean1.setIntroduce("介绍 12436578");
 		mlist.add(mbean1);
 		
 		
-		Pic_ServiceItemBean  mbean2=new Pic_ServiceItemBean();
+		Pic_ServiceBean  mbean2=new Pic_ServiceBean();
 		mbean2.setId("2");
-		mbean2.setClassName("风景");
+		mbean2.setClassName("趣图");
+		mbean1.setTitle("178趣图");
+		mbean1.setIntroduce("介绍 12436578");
 		mlist.add(mbean2);
 		
 		return mlist;

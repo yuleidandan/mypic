@@ -9,6 +9,8 @@ import java.io.InputStream;
 
 import org.apache.http.util.ByteArrayBuffer;
 
+import com.nostra13.universalimageloader.utils.L;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -243,5 +245,6 @@ public class Files {
 		}
 		return true;
 	}
-
+	
+	
 }

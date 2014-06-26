@@ -62,6 +62,14 @@
             android:name="com.amima.pic.Pic_ListGroupActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.amima.pic.Pic_GroupImageGridActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.amima.pic.Pic_ItemImageGridActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
         <!-- baidu -->
         <service
@@ -112,7 +120,7 @@
             android:label="@string/ac_name_image_gallery" />
 
         <!-- Widget -->
-        <receiver android:name=".widget.UILWidgetProvider" >
+        <receiver android:name="com.my.widget.UILWidgetProvider" >
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_provider" />
@@ -179,7 +187,8 @@
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true" >
             <intent-filter android:priority="1000" >
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!-- Required  显示通知栏 -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
+ <!-- Required  显示通知栏 -->
                 <category android:name="com.amima.pic" />
             </intent-filter>
             <intent-filter>
@@ -203,12 +212,17 @@
             android:name="com.example.jpushdemo.MyReceiver"
             android:enabled="true" >
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+ <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!-- Required  用户接收SDK消息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!-- Required  用户接收SDK通知栏信息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!-- Required  用户打开自定义通知栏的intent -->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+ <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+ <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+ <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
+ <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
                 <category android:name="com.amima.pic" />
             </intent-filter>
         </receiver>
@@ -219,17 +233,18 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="7507ad89e15f5996e1357e3e" /> <!-- </>值来自开发者平台取得的AppKey -->
+            android:value="7507ad89e15f5996e1357e3e" />
+ <!-- </>值来自开发者平台取得的AppKey -->
 
 
         <!-- sharesdk -->
 
-       <activity
+        <activity
             android:name="cn.sharesdk.wxapi.TestShare"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>  
+        </activity>
         <activity
             android:name="cn.sharesdk.wxapi.WeiBoShareActivity"
             android:launchMode="singleTask"

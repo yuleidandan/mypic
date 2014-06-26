@@ -16,7 +16,7 @@ import com.my.activity.sq.bean.AskHistoryBean;
 import com.my.util.Tools;
 import com.my.widget.HeadImageView;
 
-public class Pic_ListGroupAdapter extends BaseAdapter {
+public class Pic_GroupListAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<AskHistoryBean> list = new ArrayList<AskHistoryBean>();
 	protected ListView mListView;
@@ -38,7 +38,7 @@ public class Pic_ListGroupAdapter extends BaseAdapter {
 		this.mListView = mListView;
 	}
 
-	public Pic_ListGroupAdapter(Context context, ArrayList<AskHistoryBean> list) {
+	public Pic_GroupListAdapter(Context context, ArrayList<AskHistoryBean> list) {
 		this.context = context;
 		this.list = list;
 	}

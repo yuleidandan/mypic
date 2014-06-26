@@ -4,10 +4,13 @@ package com.amima.pic;
  * 列表
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,23 +18,27 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amima.pic.R;
 import com.my.activity.BaseActivity;
-import com.my.activity.sq.adapter.AskHistoryAdapter;
+import com.my.activity.sq.adapter.Pic_ServiceListAdapter;
 import com.my.activity.sq.bean.AskHistoryBean;
+import com.my.activity.sq.bean.Pic_ServiceBean;
 import com.my.android.http.AsyncHttpResponseHandler;
 import com.my.android.http.RequestParams;
 import com.my.util.HttpConnection;
 import com.my.util.Protocol;
 import com.my.util.SystemOut;
-import com.my.util.TimeTools;
 import com.my.util.Tools;
 import com.slidingmenu.lib.SlidingMenu;
 
@@ -45,9 +52,9 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 	private int currentpage = 1;
 	private int pagenum = 10;
 	private TextView updataButton;
-	private AskHistoryAdapter adapter;
+	private Pic_ServiceListAdapter adapter;
 
-	private ArrayList<AskHistoryBean> AskHistoryBeanlist = new ArrayList<AskHistoryBean>();
+	private ArrayList<Pic_ServiceBean> AskHistoryBeanlist = new ArrayList<Pic_ServiceBean>();
 
 	private final int GET_SUCCESS = 1;
 	private final int GET_FAIL = 2;
@@ -57,11 +64,25 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 
 	private SlidingMenu slidingMenu = null;
 
-	// id 281 有数据 分页有问题
+	private ListView lvTitle;
+	private SimpleAdapter lvAdapter;
+
+	private LinearLayout llGoHome;
+	private ImageButton imgLogin;
+	private Button bn_refresh;
+
+	private TextView mAboveTitle;
+	private SlidingMenu sm;
+	private boolean mIsTitleHide = false;
+	private boolean mIsAnim = false;
+	private final String LIST_TEXT = "text";
+	private final String LIST_IMAGEVIEW = "img";
+	private int mTag = 0;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.pic_main_list);
 
 		image_back = (ImageView) findViewById(R.id.image_back);
@@ -77,24 +98,56 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 		listView.addFooterView(footerView);
 		footerView.setVisibility(View.GONE);
 		listView.setOnScrollListener(new MyOnScrollListener());
-
-		updataButton = (TextView) footerView.findViewById(R.id.updata_button);
-		// updataButton.setText("更多评价数据");
-
-		adapter = new AskHistoryAdapter(this, AskHistoryBeanlist);
+		AskHistoryBeanlist=Tools.getServiceItem();
+		adapter = new Pic_ServiceListAdapter(this, AskHistoryBeanlist);
 		listView.setAdapter(adapter);
 
 		tv_message = (TextView) findViewById(R.id.asktime);
 		tv_nodata = (TextView) findViewById(R.id.tv_nodata);
 
 		if (!Tools.isNull(app.user.getId())) {
-			if (Tools.isDebug) {
-				app.user.setId("281");
-			}
+
 			getAllData(app.user.getId(), currentpage, pagenum);
 		}
 
 		leftSlidingMenu();
+		lvTitle = (ListView) findViewById(R.id.behind_list_show);
+		initListView();
+	}
+
+	// // [start]初始化函数
+	// private void initSlidingMenu() {
+	// setBehindContentView(R.layout.behind_slidingmenu);
+	// // customize the SlidingMenu
+	// sm = getSlidingMenu();
+	// sm.setShadowWidthRes(R.dimen.shadow_width);
+	// sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+	// // sm.setFadeDegree(0.35f);
+	// sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+	// sm.setShadowDrawable(R.drawable.slidingmenu_shadow);
+	// //sm.setShadowWidth(20);
+	// sm.setBehindScrollScale(0);
+	// }
+
+	private List<Map<String, Object>> getData() {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(LIST_TEXT, getResources().getString(R.string.menuGood));
+		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_handpick);
+		list.add(map);
+		map = new HashMap<String, Object>();
+		map.put(LIST_TEXT, getResources().getString(R.string.menuNews));
+		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_news);
+		list.add(map);
+		map = new HashMap<String, Object>();
+		map.put(LIST_TEXT, getResources().getString(R.string.menuStudio));
+		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_studio);
+		list.add(map);
+		map = new HashMap<String, Object>();
+		map.put(LIST_TEXT, getResources().getString(R.string.menuBlog));
+		map.put(LIST_IMAGEVIEW, R.drawable.dis_menu_blog);
+		list.add(map);
+		return list;
 	}
 
 	private void leftSlidingMenu() {
@@ -103,10 +156,56 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 		slidingMenu = new SlidingMenu(this);
 		slidingMenu.setMode(SlidingMenu.LEFT);
 		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); // 触摸边界拖出菜单
-		//slidingMenu.setMenu(R.layout.edj_membercenter);//设置抽屉菜单布局文件
-		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);//设置抽屉菜单的宽度
+		slidingMenu.setMenu(R.layout.behind_slidingmenu);// 设置抽屉菜单布局文件
+		slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);// 设置抽屉菜单的宽度
 		// 将抽屉菜单与主页面关联起来
 		slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+	}
+
+	private void initListView() {
+		lvAdapter = new SimpleAdapter(this, getData(),
+				R.layout.behind_list_show, new String[] { LIST_TEXT,
+						LIST_IMAGEVIEW },
+				new int[] { R.id.textview_behind_title,
+						R.id.imageview_behind_icon }) {
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				// TODO Auto-generated method stub.
+				View view = super.getView(position, convertView, parent);
+				if (position == mTag) {
+					view.setBackgroundResource(R.drawable.back_behind_list);
+					lvTitle.setTag(view);
+				} else {
+					view.setBackgroundColor(Color.TRANSPARENT);
+				}
+				return view;
+			}
+		};
+		lvTitle.setAdapter(lvAdapter);
+		// lvTitle.setOnItemClickListener(new OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View view,
+		// int position, long id) {
+		// NavigationModel navModel = navs.get(position);
+		// mAboveTitle.setText(navModel.getName());
+		// current_page = navModel.getTags();
+		// if (lvTitle.getTag() != null) {
+		// if (lvTitle.getTag() == view) {
+		// MainActivity.this.showContent();
+		// return;
+		// }
+		// ((View) lvTitle.getTag())
+		// .setBackgroundColor(Color.TRANSPARENT);
+		// }
+		// lvTitle.setTag(view);
+		// view.setBackgroundResource(R.drawable.back_behind_list);
+		// imgQuery.setVisibility(View.VISIBLE);
+		// switch (position) {
+		//
+		// }
+		// }
+		// });
+
 	}
 
 	/**
@@ -188,7 +287,7 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case GET_SUCCESS:
-				List<AskHistoryBean> all_list = (List<AskHistoryBean>) msg.obj;
+				List<Pic_ServiceBean> all_list = (List<Pic_ServiceBean>) msg.obj;
 				if (all_list != null && all_list.size() > 0) {
 
 					AskHistoryBeanlist.addAll(all_list);
@@ -199,16 +298,7 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 				footerView.setVisibility(View.GONE);
 				adapter.notifyDataSetChanged();
 
-				String mtime = all_list.get(0).getTotalTime();
-				if (!Tools.isNull(mtime)) {
-
-					long thistime = Long.parseLong(mtime);
-					mtime = TimeTools.formatStringDuring(thistime);
-				}
-
-				String message = "总计咨询" + all_list.get(0).getTotalNum()
-						+ "次，时长" + mtime;
-				tv_message.setText(message);
+			 
 				break;
 
 			case GET_FAIL:
@@ -249,9 +339,8 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 
 				footerView.setVisibility(View.VISIBLE);
 				isfinishing = false;
-				updataButton.setVisibility(View.INVISIBLE);
 				Progress_view.setVisibility(View.VISIBLE);
-				getAllData(app.user.getId(), currentpage, pagenum);
+//				getAllData(app.user.getId(), currentpage, pagenum);
 			}
 		}
 
@@ -283,4 +372,5 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
 }
