@@ -770,8 +770,8 @@ public class Tools {
 		Pic_ServiceBean  mbean2=new Pic_ServiceBean();
 		mbean2.setId("2");
 		mbean2.setClassName("趣图");
-		mbean1.setTitle("178趣图");
-		mbean1.setIntroduce("介绍 12436578");
+		mbean2.setTitle("178趣图");
+		mbean2.setIntroduce("介绍 12436578");
 		mlist.add(mbean2);
 		
 		return mlist;

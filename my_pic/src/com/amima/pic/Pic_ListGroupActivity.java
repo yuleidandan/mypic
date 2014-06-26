@@ -37,10 +37,13 @@ import com.my.activity.sq.bean.Pic_ServiceBean;
 import com.my.android.http.AsyncHttpResponseHandler;
 import com.my.android.http.RequestParams;
 import com.my.util.HttpConnection;
+import com.my.util.IntentUtil;
 import com.my.util.Protocol;
 import com.my.util.SystemOut;
 import com.my.util.Tools;
+import com.my.widget.CustomButton;
 import com.slidingmenu.lib.SlidingMenu;
+import com.umeng.fb.FeedbackAgent;
 
 public class Pic_ListGroupActivity extends BaseActivity implements
 		OnClickListener {
@@ -78,6 +81,9 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 	private final String LIST_TEXT = "text";
 	private final String LIST_IMAGEVIEW = "img";
 	private int mTag = 0;
+	
+	  private CustomButton cbFeedback;
+	    private CustomButton cbAbove;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -112,6 +118,10 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 
 		leftSlidingMenu();
 		lvTitle = (ListView) findViewById(R.id.behind_list_show);
+		 cbFeedback = (CustomButton) findViewById(R.id.cbFeedback);
+	        cbFeedback.setOnClickListener(this);
+	        cbAbove = (CustomButton) findViewById(R.id.cbAbove);
+	        cbAbove.setOnClickListener(this);
 		initListView();
 	}
 
@@ -358,6 +368,14 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 			finish();
 
 			break;
+			
+        case R.id.cbFeedback:
+            FeedbackAgent agent = new FeedbackAgent(this);
+            agent.startFeedbackActivity();
+            break;
+        case R.id.cbAbove:
+            IntentUtil.start_activity(this, Pic_AboutActivity.class);
+            break;
 
 		}
 	}
