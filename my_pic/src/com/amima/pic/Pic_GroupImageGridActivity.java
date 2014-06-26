@@ -16,9 +16,6 @@
 package com.amima.pic;
 
 import static com.nostra13.example.universalimageloader.Constants.IMAGES;
-
-import java.io.File;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -31,10 +28,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.amima.pic.R;
+import com.my.util.SystemOut;
 import com.nostra13.example.universalimageloader.AbsListViewBaseActivity;
-import com.nostra13.example.universalimageloader.ImagePagerActivity;
 import com.nostra13.example.universalimageloader.Constants.Extra;
+import com.nostra13.example.universalimageloader.ImagePagerActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
@@ -74,7 +71,7 @@ public class Pic_GroupImageGridActivity extends AbsListViewBaseActivity {
 				Intent intent = new Intent();
 				intent.putExtra(Extra.IMAGES, IMAGES);
 				intent.setClass(Pic_GroupImageGridActivity.this,
-						Pic_GroupImageGridActivity.class);
+						Pic_ItemImageGridActivity.class);
 				Pic_GroupImageGridActivity.this.startActivity(intent);
 
 			}
@@ -126,6 +123,7 @@ public class Pic_GroupImageGridActivity extends AbsListViewBaseActivity {
 				holder = (ViewHolder) view.getTag();
 			}
 
+			SystemOut.out("imageUrls[position].." + imageUrls[position]);
 			imageLoader.displayImage(imageUrls[position], holder.imageView,
 					options, new SimpleImageLoadingListener() {
 						@Override

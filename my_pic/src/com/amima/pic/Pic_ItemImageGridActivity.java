@@ -15,7 +15,6 @@
  *******************************************************************************/
 package com.amima.pic;
 
-import static com.nostra13.example.universalimageloader.Constants.IMAGES;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -28,9 +27,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.amima.pic.R;
 import com.nostra13.example.universalimageloader.AbsListViewBaseActivity;
-import com.nostra13.example.universalimageloader.ImagePagerActivity;
 import com.nostra13.example.universalimageloader.Constants.Extra;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -73,7 +70,7 @@ public class Pic_ItemImageGridActivity extends AbsListViewBaseActivity {
 	}
 
 	 private void startImagePagerActivity(int position) {
-	 Intent intent = new Intent(this, ImagePagerActivity.class);
+	 Intent intent = new Intent(this, Pic_ImagePagerActivity.class);
 	 intent.putExtra(Extra.IMAGES, imageUrls);
 	 intent.putExtra(Extra.IMAGE_POSITION, position);
 	 startActivity(intent);
