@@ -31,7 +31,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.my.activity.BaseActivity;
-import com.my.activity.sq.Sq_AboutUs;
 import com.my.activity.sq.adapter.Pic_ServiceListAdapter;
 import com.my.activity.sq.bean.AskHistoryBean;
 import com.my.activity.sq.bean.Pic_ServiceBean;
@@ -375,7 +374,7 @@ public class Pic_ListGroupActivity extends BaseActivity implements
             agent.startFeedbackActivity();
             break;
         case R.id.cbAbove:
-            IntentUtil.start_activity(this, Sq_AboutUs.class);
+            IntentUtil.start_activity(this, Pic_AboutActivity.class);
             break;
 
 		}
