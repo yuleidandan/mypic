@@ -38,16 +38,23 @@ public class MyApp extends Application {
 	public static MyApp mApp;
 	public int allTotalRead;
 	public static UserBean user = new UserBean();
-	public static String userKey;
+
 
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	public AsyncHttpClient asyncHttpClient;
 	public static boolean isAutoUpate = true;
-	public static String localVersion;
+	
 
 	public LocationClient mLocationClient;
 	public GeofenceClient mGeofenceClient;
 	private MyLocationListener mMyLocationListener;
+	
+	public static String userKey;
+	public String sysVersion;// 系统版本
+	public String mobileModel;// 设备名称
+	public static String localVersion; // 客户端版本
+	public String networkType;// 网络类型
+	public String telephone;// 用户电话
 
 	public static double lon;
 	public static double lat;

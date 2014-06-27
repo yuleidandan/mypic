@@ -3,7 +3,7 @@ package com.my.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.my.activity.sq.Sq_InitActivity;
+import com.amima.pic.Pic_InitActivity;
 
 /**
  * @author Administrator
@@ -19,7 +19,7 @@ public class SkipActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Intent sq_Intent = new Intent(this, Sq_InitActivity.class);
+		Intent sq_Intent = new Intent(this, Pic_InitActivity.class);
 		startActivity(sq_Intent);
 		this.finish();
 

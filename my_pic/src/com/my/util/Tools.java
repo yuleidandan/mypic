@@ -5,14 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -29,8 +25,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -41,16 +35,9 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -154,172 +141,6 @@ public class Tools {
 		// a.startActivity(intent);
 	}
 
-	// 判断网络连接
-	public static boolean isConNetwork(final Activity con) {
-		if (!isConnectInternet(con)) {
-			return true;
-		}
-		return false;
-	}
-
-	public static boolean isConnectInternet(Activity inContext) {
-		Context incontext = inContext.getApplicationContext();
-		ConnectivityManager conManager = (ConnectivityManager) incontext
-				.getSystemService(incontext.CONNECTIVITY_SERVICE);
-		NetworkInfo networkInfo = conManager.getActiveNetworkInfo();
-		if (networkInfo != null) {
-			return networkInfo.isAvailable();
-		}
-		return false;
-
-	}
-
-	public static String getwebVersion(Context app) {
-		String typeName = null;
-		ConnectivityManager cm = (ConnectivityManager) app
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo info = cm.getActiveNetworkInfo();
-		if (info != null) {
-			typeName = info.getTypeName();
-		}
-		return typeName;
-	}
-
-	private static final String NET_TYPE_WIFI = "WIFI";
-	public static final int NET_NOT_AVAILABLE = 0;
-	public static final int NET_WIFI = 1;
-	public static final int NET_PROXY = 2;
-	public static final int NET_NORMAL = 3;
-
-	/**
-	 * 网络类型
-	 */
-	private volatile static int networkType = NET_NOT_AVAILABLE;
-
-	/**
-	 * 判断网络连接是否可用
-	 */
-	public static boolean checkNetworkAvailable1(Context inContext) {
-		int type = getNetworkType(inContext);
-		if (type == NET_NOT_AVAILABLE) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 获取网络连接类型
-	 */
-	public synchronized static int getNetworkType(Context inContext) {
-		Context context = inContext.getApplicationContext();
-		ConnectivityManager manager = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo networkinfo = manager.getActiveNetworkInfo();
-		if (networkinfo == null || !networkinfo.isAvailable()) {
-			// 当前网络不可用
-			networkType = NET_NOT_AVAILABLE;
-		} else {
-			// 如果当前是WIFI连接
-			if (NET_TYPE_WIFI.equals(networkinfo.getTypeName())) {
-				networkType = NET_WIFI;
-			}
-			// 非WIFI联网
-			else {
-				String proxyHost = android.net.Proxy.getDefaultHost();
-				// 代理模式
-				if (proxyHost != null) {
-					networkType = NET_PROXY;
-				}
-				// 直连模式
-				else {
-					networkType = NET_NORMAL;
-				}
-			}
-		}
-		return networkType;
-	}
-
-	private static String readUserKey(Context context) {
-		SharedPreferences user = context.getSharedPreferences("user_info", 0);
-		return user.getString("userKey", "");
-	}
-
-	private static void writeUserKey(String userKey, Context context) {
-		SharedPreferences user = context.getSharedPreferences("user_info", 0);
-		Editor editor = user.edit();
-		editor.putString("userKey", userKey);
-		editor.commit();
-	}
-
-	private static String readTelephone(Context context) {
-		SharedPreferences user = context.getSharedPreferences("user_info", 0);
-		return user.getString("telephone", "");
-	}
-
-	private static void writeTelephone(String telephone, Context context) {
-		SharedPreferences user = context.getSharedPreferences("user_info", 0);
-		Editor editor = user.edit();
-		editor.putString("telephone", telephone);
-		editor.commit();
-	}
-
-	private static String getLocalMacAddress(Context context) {
-		WifiManager wifi = (WifiManager) context
-				.getSystemService(Context.WIFI_SERVICE);
-		WifiInfo info = wifi.getConnectionInfo();
-		return info.getMacAddress();
-	}
-
-	private static String getLocalIpAddress() {
-		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface
-					.getNetworkInterfaces(); en.hasMoreElements();) {
-				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf
-						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress()) {
-						return inetAddress.getHostAddress().toString();
-					}
-				}
-			}
-		} catch (SocketException ex) {
-			Log.e("WifiPreference IpAddress", ex.toString());
-		}
-		return null;
-	}
-
-	/**
-	 * 获取手机号
-	 * 
-	 * @param context
-	 * @return
-	 */
-	public static String getTelephone(Context context) {
-		String telephone = readTelephone(context);
-		if (telephone != null && !"".equals(telephone)) {
-			return telephone;
-		} else {
-			TelephonyManager tm = (TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-			// 先获取手机号
-			String mobile = tm.getLine1Number();
-			// System.out.println(mobile+"..................mobile");
-			if (mobile != null && !"".equals(mobile)) {
-				writeTelephone(mobile, context);
-				return mobile;
-			} else {
-				String imei = tm.getDeviceId();
-				if (imei != null && !"".equals(imei)) {
-					writeTelephone(imei, context);
-					return imei;
-				}
-
-			}
-		}
-		return null;
-	}
-
 	// ----------------------------------------jk
 	public static boolean idNotInvalid(long num) {
 		if (num > 0)
@@ -331,57 +152,6 @@ public class Tools {
 		if (str == null || "".equals(str.trim()) || "null".equals(str.trim()))
 			return true;
 		return false;
-	}
-
-	/**
-	 * 获取手机唯一识别码 userkey
-	 * 
-	 * @param context
-	 * @return
-	 */
-	public static String getUserKey(Context context) {
-		TelephonyManager tm = (TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		// 先获取手机号
-		String mobile = tm.getLine1Number();
-		if (mobile != null && !"".equals(mobile)) {
-			return mobile;
-		}
-
-		/*
-		 * String simSerialNumber = tm.getSimSerialNumber(); if (simSerialNumber
-		 * != null && !"".equals(simSerialNumber)) { return simSerialNumber; }
-		 * 
-		 * String subscriberId = tm.getSubscriberId(); if (subscriberId != null
-		 * && !"".equals(subscriberId)) { return subscriberId; }
-		 */
-
-		String imei = tm.getDeviceId();
-		if (imei != null && !"".equals(imei)) {
-			return imei;
-		}
-		try {
-			String android_id = Secure.getString(context.getContentResolver(),
-					Secure.ANDROID_ID);
-			if (!Tools.isNull(android_id)) {
-				return android_id;
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		String mac = getLocalMacAddress(context);
-		if (mac != null && !"".equals(mac)) {
-			return mac;
-		}
-
-		String userKey = readUserKey(context);
-		if (userKey != null && !"".equals(userKey)) {
-			return userKey;
-		}
-
-		userKey = "" + new Date().getTime() + ((int) (Math.random() * 1000000));
-		writeUserKey(userKey, context);
-		return userKey;
 	}
 
 	/**
@@ -642,26 +412,27 @@ public class Tools {
 		Bitmap bitmap = view.getDrawingCache(true);
 		return bitmap;
 	}
-	
+
 	public static String getUrl(String relativeUrl) {
-		if (relativeUrl==null ||"null".equals(relativeUrl)) return null;
-		if (relativeUrl.startsWith("http://")) return relativeUrl;
-		if (relativeUrl.startsWith("https://")) return relativeUrl;
+		if (relativeUrl == null || "null".equals(relativeUrl))
+			return null;
+		if (relativeUrl.startsWith("http://"))
+			return relativeUrl;
+		if (relativeUrl.startsWith("https://"))
+			return relativeUrl;
 		return "http://" + Constants.HOST + relativeUrl;
 	}
-	
-	public static String getKey(Context context){
-		String deviceInfo=getDeviceInfo(context);
-		String md5=MathUtils.MD5(deviceInfo);
-		String md51=MathUtils.MD5(md5+Constants.MD5KEY);
-		if (md51!=null&&md51.length()>4){
-			md51=md51.substring(md51.length()-4);
+
+	public static String getKey(Context context) {
+		String deviceInfo = getDeviceInfo(context);
+		String md5 = MathUtils.MD5(deviceInfo);
+		String md51 = MathUtils.MD5(md5 + Constants.MD5KEY);
+		if (md51 != null && md51.length() > 4) {
+			md51 = md51.substring(md51.length() - 4);
 		}
-		return md5+md51;
+		return md5 + md51;
 	}
-	
-	
-	
+
 	public static void showLongToast(String message, Context context) {
 		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 	}
@@ -669,8 +440,7 @@ public class Tools {
 	public static void showShortToast(String message, Context context) {
 		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 	}
-	
-	
+
 	// ----------json解析
 	// optString()这个方法可以在value没有数据的时候返回null值
 	public static String JSONString(JSONObject obj, String name)
@@ -713,7 +483,7 @@ public class Tools {
 		}
 		return 0;
 	}
-	
+
 	public static String timeDesc(Date time) {
 		try {
 			StringBuffer buf = new StringBuffer();
@@ -750,32 +520,31 @@ public class Tools {
 		Date b = new Date(d1.getYear(), d1.getMonth(), d1.getDate());
 		return (int) ((a.getTime() - b.getTime()) / 1000 / 3600 / 24);
 	}
-	
-	
+
 	/**
 	 * 获取图片分类
+	 * 
 	 * @return
 	 */
-	public static ArrayList<Pic_ServiceBean> getServiceItem(){
-		
-		ArrayList<Pic_ServiceBean> mlist=new ArrayList<Pic_ServiceBean>();
-		Pic_ServiceBean  mbean1=new Pic_ServiceBean();
+	public static ArrayList<Pic_ServiceBean> getServiceItem() {
+
+		ArrayList<Pic_ServiceBean> mlist = new ArrayList<Pic_ServiceBean>();
+		Pic_ServiceBean mbean1 = new Pic_ServiceBean();
 		mbean1.setId("1");
 		mbean1.setClassName("趣图");
 		mbean1.setTitle("多玩趣图");
 		mbean1.setIntroduce("介绍 12436578");
 		mlist.add(mbean1);
-		
-		
-		Pic_ServiceBean  mbean2=new Pic_ServiceBean();
+
+		Pic_ServiceBean mbean2 = new Pic_ServiceBean();
 		mbean2.setId("2");
 		mbean2.setClassName("趣图");
 		mbean2.setTitle("178趣图");
 		mbean2.setIntroduce("介绍 12436578");
 		mlist.add(mbean2);
-		
+
 		return mlist;
-		
+
 	}
-	
+
 }
