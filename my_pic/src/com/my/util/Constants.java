@@ -31,4 +31,11 @@ public class Constants {
 	
 	public static final String INTENT_ACTION_SEND_MSG_AGAIN="com.em.send.msg_again";
 	
+	public static final String DEVICE_INFO="device_info";
+	
+	public static final String DEVICE_INFO_PHONE="device_info_phone";
+	
+	public static final String DEVICE_INFO_USERKEY="device_info_userkey";
+	
+	
 }
