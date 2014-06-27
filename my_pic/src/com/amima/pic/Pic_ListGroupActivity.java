@@ -21,6 +21,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -192,6 +194,17 @@ public class Pic_ListGroupActivity extends BaseActivity implements
 			}
 		};
 		lvTitle.setAdapter(lvAdapter);
+		lvTitle.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				//重新加载数据
+				mTag = arg2;
+				lvAdapter.notifyDataSetChanged();
+			}
+		});
 		// lvTitle.setOnItemClickListener(new OnItemClickListener() {
 		// @Override
 		// public void onItemClick(AdapterView<?> parent, View view,
